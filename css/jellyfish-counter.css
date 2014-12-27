@@ -1,5 +1,5 @@
 /* Counter container styles, you probably don't need to change these */
-.jellyfish-counter {
+.jcw, .jellyfish-counter {
   width: auto;
   overflow: hidden;
   vertical-align: top;
@@ -84,7 +84,7 @@
 .jcw-highlight-7 { bottom: 0%; height: 25%; }
 .jcw-highlight-8 { bottom: 0%; height: 8%; }
 
-/* Base styles for digits, can be overridden in widget settings */
+/* Base styles for digits, can be overridden by settings */
 
 .jcw-digit, .jcw-tenth {
   position: absolute;

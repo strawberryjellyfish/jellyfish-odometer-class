@@ -1,5 +1,7 @@
 //============================================================================//
-//  Animated Odometer class for use in Jellyfish Counter Widget for WordPress
+//  Animated Odometer class originally developed for use in my
+//  Jellyfish Counter Widget for WordPress
+//  http://strawberryjellyfish.com/wordpress-plugins/jellyfish-counter/
 //  Version 1.9
 //  Copyright (C) 2014 Robert Miller
 //  http://strawberryjellyfish.com
