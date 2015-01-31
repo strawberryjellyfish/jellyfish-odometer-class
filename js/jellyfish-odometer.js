@@ -52,7 +52,7 @@ function JellyfishOdometer(container) {
 	this.wholeNumber = 0;
 	this.timestamp = false;
 	this.interval = 1;
-	this.active = false;
+	this.active = true;
 	this.completedFunction = function(){};
 	this.currentValue = this.startValue;
 
@@ -99,11 +99,10 @@ function JellyfishOdometer(container) {
 	this.digitInfo = new Array();
 
 	// Initialise a counter
-	this.init = function(paused) {
-		this.active = !paused;
+	this.init = function() {
 		this.drawOdometer(this.container);
 		this.set(this.startValue);
-		if (this.endValue != this.startValue) {
+		if ((this.endValue != this.startValue) && this.active) {
 			this.updateOdometer();
 		}
 	};
@@ -238,9 +237,10 @@ function JellyfishOdometer(container) {
 			this.currentValue = (this.direction == 'down') ?
 				this.currentValue - 0.01 : this.currentValue + 0.01;
 		}
-		if ((this.direction != 'down' && (this.currentValue < this.endValue)) ||
-			(this.direction == 'down' && (this.currentValue > this.endValue)) &&
-			this.active) {
+		if (this.active &&
+				(this.direction != 'down' && ( ! this.endValue || (this.currentValue < this.endValue))) ||
+				(this.direction == 'down' && (this.currentValue > this.endValue))
+			) {
 			this.set(this.currentValue);
 			var that = this;
 			window.setTimeout(function() {
