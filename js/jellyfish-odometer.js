@@ -46,7 +46,6 @@ function JellyfishOdometer(container) {
 
 	this.waitTime = 10;
 	this.startValue = 0;
-	this.endValue = 0;
 	this.currentValue = 0;
 	this.direction = 'up';
 	this.wholeNumber = 0;
