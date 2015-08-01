@@ -2,7 +2,7 @@
 //  Animated Odometer class originally developed for use in my
 //  Jellyfish Counter Widget for WordPress
 //  http://strawberryjellyfish.com/wordpress-plugins/jellyfish-counter/
-//  Version 1.9
+//  Version 1.9.1
 //  Copyright (C) 2014 Robert Miller
 //  http://strawberryjellyfish.com
 //
@@ -51,14 +51,20 @@ function JellyfishOdometer(container) {
 	this.wholeNumber = 0;
 	this.timestamp = false;
 	this.interval = 1;
+	this.tickMultiplier = 1;
 	this.active = true;
 	this.completedFunction = function(){};
-	this.currentValue = this.startValue;
 
 	// get all instance specific configuration from container data attributes
 	var opts = jQuery(this.container).data();
 	for (var key in opts) {
 		this[key] = opts[key];
+	}
+
+	this.currentValue = this.startValue * this.tickMultiplier;
+
+	if (typeof(this.endValue) != 'undefined' && this.endValue != '' && this.currentValue > this.endValue) {
+		this.currentValue = this.endValue;
 	}
 
 	// parse the format to allow for fancy counters!
@@ -100,7 +106,6 @@ function JellyfishOdometer(container) {
 	// Initialise a counter
 	this.init = function() {
 		this.drawOdometer(this.container);
-		this.set(this.startValue);
 		if ((this.endValue != this.startValue) && this.active) {
 			this.updateOdometer();
 		}
@@ -225,7 +230,7 @@ function JellyfishOdometer(container) {
 			this.currentValue = (this.direction == 'down') ?
 				this.currentValue - 0.15 : this.currentValue + 0.15;
 			this.wholeNumber = this.wholeNumber + 0.15;
-			if (this.wholeNumber >= 1) {
+			if (this.wholeNumber >= this.tickMultiplier) {
 				this.wholeNumber = 0;
 				this.currentValue = Math.round(this.currentValue);
 				this.waitTime = this.interval * 1000;
